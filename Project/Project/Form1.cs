@@ -21,6 +21,7 @@ namespace Project
 
         private void LoadData()
         {
+            // Doing this as test
             DataTable dt = new DataTable();
             string[] lines = System.IO.File.ReadAllLines("population_by_country_2020.csv");
             if (lines.Length > 0)
