@@ -30,10 +30,7 @@ namespace Project.Entities
                     }
                     dt.Rows.Add(dr);
                 }
-
             }
-
-
             return dt;
         }
     }
