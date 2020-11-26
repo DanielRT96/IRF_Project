@@ -14,35 +14,46 @@ namespace Project
 {
     public partial class Form1 : Form
     {
+        DataTable csv = GetCsvData.ConvertCSVtoDataTable("population_by_country_2020.csv");
         public Form1()
         {
             InitializeComponent();
-            dataGridView1.DataSource = GetCsvData.ConvertCSVtoDataTable("population_by_country_2020.csv");
+            LoadData();
 
+        }
 
+        private void LoadData()
+        {
+            dataGridView1.DataSource = csv;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var searchValue = textBox1.Text;
-
-            int rowIndex = -1;
-
-            DataGridViewRow row = dataGridView1.Rows.Cast<DataGridViewRow>()
-                                                    .Where(r => r.Cells["Country (or dependency)"].Value.ToString().Equals(searchValue))
-                                                    .First();
-
-            rowIndex = row.Index;
-            dataGridView1.Rows[rowIndex].Selected = true;
-
-
-            //string rowFilter = string.Format("[{0}] = '{1}'", "Country (or dependency)", searchValue);
-            //(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
+            LoadData();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
         }
 
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var searchValue = textBox1.Text;
+
+                if (searchValue == "")
+                {
+                    return;
+                } else
+                {
+                    DataTable selectedTable = csv.AsEnumerable()
+                                                    .Where(r => r.Field<string>("Country (or dependency)") == searchValue)
+                                                    .CopyToDataTable();
+
+                    dataGridView1.DataSource = selectedTable;
+                }
+            }
+        }
     }
 }
