@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,44 +17,32 @@ namespace Project
         public Form1()
         {
             InitializeComponent();
-            LoadData();
+            dataGridView1.DataSource = GetCsvData.ConvertCSVtoDataTable("population_by_country_2020.csv");
+
+
         }
 
-        private void LoadData()
+        private void button1_Click(object sender, EventArgs e)
         {
-            // Doing this as test
-            DataTable dt = new DataTable();
-            string[] lines = System.IO.File.ReadAllLines("population_by_country_2020.csv");
-            if (lines.Length > 0)
-            {
-                string firstLine = lines[0];
+            var searchValue = textBox1.Text;
 
-                string[] headerLabels = firstLine.Split(',');
+            int rowIndex = -1;
 
-                foreach(string headerWord in headerLabels)
-                {
-                    dt.Columns.Add(new DataColumn(headerWord));
-                }
+            DataGridViewRow row = dataGridView1.Rows.Cast<DataGridViewRow>()
+                                                    .Where(r => r.Cells["Country (or dependency)"].Value.ToString().Equals(searchValue))
+                                                    .First();
 
-                for (int i = 1; i < lines.Length; i++)
-                {
-                    string[] dataWords = lines[i].Split(',');
-                    DataRow dr = dt.NewRow();
-                    int columnIndex = 0;
-                    foreach (string headerWord in headerLabels)
-                    {
+            rowIndex = row.Index;
+            dataGridView1.Rows[rowIndex].Selected = true;
 
-                        dr[headerWord] = dataWords[columnIndex++];
-                    }
 
-                    dt.Rows.Add(dr);
-                }
-            }
-            if(dt.Rows.Count>0)
-            {
-                dataGridView1.DataSource = dt;
-            }
-
+            //string rowFilter = string.Format("[{0}] = '{1}'", "Country (or dependency)", searchValue);
+            //(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
     }
 }
