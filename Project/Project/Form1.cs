@@ -26,6 +26,7 @@ namespace Project
         private void LoadData()
         {
             dataGridView1.DataSource = csv;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,6 +36,7 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e)
         {
+            MostPopulatedCountries.Clear();
 
             MostPopulatedCountries.Add(new HighestPopulation() { Country = "China", Population = 100 });
             MostPopulatedCountries.Add(new HighestPopulation() { Country = "Hungary", Population = 10 });
@@ -42,7 +44,7 @@ namespace Project
 
             dataGridView1.DataSource = MostPopulatedCountries;
 
-            chart1.DataSource = MostPopulatedCountries;
+            chart1.DataSource = csv;
 
             var series = chart1.Series[0];
             series.XValueMember = "Country";
@@ -69,13 +71,17 @@ namespace Project
                     return;
                 } else
                 {
-                    DataTable selectedTable = csv.AsEnumerable()
+                    DataTable selectedCountry = csv.AsEnumerable()
                                                     .Where(r => r.Field<string>("Country (or dependency)") == searchValue)
                                                     .CopyToDataTable();
 
-                    dataGridView1.DataSource = selectedTable;
+                    dataGridView1.DataSource = selectedCountry;
                 }
+
+                textBox1.Text = "";
             }
+
+
         }
 
         private void button3_Click(object sender, EventArgs e)
