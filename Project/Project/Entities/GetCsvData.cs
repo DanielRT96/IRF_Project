@@ -31,6 +31,7 @@ namespace Project.Entities
                     dt.Rows.Add(dr);
                 }
             }
+            ChangeType.ChangeColumnDataType(dt, "Population (2020)", typeof(int));
             return dt;
         }
     }

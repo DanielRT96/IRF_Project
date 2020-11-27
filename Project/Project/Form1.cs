@@ -21,12 +21,14 @@ namespace Project
             InitializeComponent();
             LoadData();
 
+
         }
 
         private void LoadData()
         {
             dataGridView1.DataSource = csv;
-            
+            dataGridView1.Columns[("Population (2020)")].DisplayIndex = 1;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,7 +36,7 @@ namespace Project
             LoadData();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // WIP
         {
             MostPopulatedCountries.Clear();
 
@@ -44,7 +46,7 @@ namespace Project
 
             dataGridView1.DataSource = MostPopulatedCountries;
 
-            chart1.DataSource = csv;
+            chart1.DataSource = MostPopulatedCountries;
 
             var series = chart1.Series[0];
             series.XValueMember = "Country";
@@ -88,5 +90,6 @@ namespace Project
         {
             // ...
         }
+
     }
 }
