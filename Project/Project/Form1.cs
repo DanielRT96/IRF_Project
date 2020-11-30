@@ -24,7 +24,10 @@ namespace Project
 
         private void LoadData()
         {
-            dataGridView1.DataSource = csv;
+            
+            panel2.Visible = true;
+            panel1.Visible = false;
+            dataGridView2.DataSource = csv;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,6 +37,8 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e) // WIP
         {
+            panel2.Visible = false;
+            panel1.Visible = true;
             DataTable highestPopluation = csv.Copy();
             HighestPopulation.GetTopFive(highestPopluation, 2, 5);
 
@@ -69,7 +74,7 @@ namespace Project
                                                     .Where(r => r.Field<string>("Country (or dependency)") == searchValue)
                                                     .CopyToDataTable();
 
-                    dataGridView1.DataSource = selectedCountry;
+                    dataGridView2.DataSource = selectedCountry;
                 }
                 textBox1.Text = "";
             }
