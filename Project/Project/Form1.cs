@@ -24,9 +24,8 @@ namespace Project
 
         private void LoadData()
         {
-            
-            panel2.Visible = true;
-            panel1.Visible = false;
+
+            changePanel(panel2);
             dataGridView2.DataSource = csv;
         }
 
@@ -37,8 +36,8 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e) // WIP
         {
-            panel2.Visible = false;
-            panel1.Visible = true;
+            changePanel(panel1);
+
             DataTable highestPopluation = csv.Copy();
             HighestPopulation.GetTopFive(highestPopluation, 2, 5);
 
@@ -65,26 +64,40 @@ namespace Project
             {
                 var searchValue = textBox1.Text;
 
-                if (searchValue == "")
-                {
-                    return;
-                } else
+                try
                 {
                     DataTable selectedCountry = csv.AsEnumerable()
-                                                    .Where(r => r.Field<string>("Country (or dependency)") == searchValue)
-                                                    .CopyToDataTable();
+                            .Where(r => r.Field<string>("Country (or dependency)") == searchValue)
+                            .CopyToDataTable();
 
                     dataGridView2.DataSource = selectedCountry;
+                } catch
+                {
+                    MessageBox.Show("Invalid input!");
                 }
+      
                 textBox1.Text = "";
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            changePanel(panel3);
             // ...
         }
 
+        private void changePanel(Panel chosenPanel)
+        {
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(Panel))
+                {
+                    // Invert the visibility state of the panel
+                    c.Visible = false;
+                }
+            }
+            chosenPanel.Visible = true;
+        }
 
     }
 }
