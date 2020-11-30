@@ -73,7 +73,8 @@ namespace Project
                             .CopyToDataTable();
 
                     dataGridView2.DataSource = selectedCountry;
-                } catch
+                } 
+                catch
                 {
                     MessageBox.Show("Invalid input!");
                 }
