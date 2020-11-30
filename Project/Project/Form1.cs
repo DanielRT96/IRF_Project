@@ -34,7 +34,7 @@ namespace Project
             LoadData();
         }
 
-        private void button2_Click(object sender, EventArgs e) // WIP
+        private void button2_Click(object sender, EventArgs e)
         {
             changePanel(panel1);
 
@@ -92,7 +92,6 @@ namespace Project
             {
                 if (c.GetType() == typeof(Panel))
                 {
-                    // Invert the visibility state of the panel
                     c.Visible = false;
                 }
             }

@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\ChangeType.cs" />
     <Compile Include="Entities\GetCsvData.cs" />
     <Compile Include="Entities\HighestPopulation.cs" />
     <Compile Include="Entities\Quiz.cs" />
