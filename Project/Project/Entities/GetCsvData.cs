@@ -32,7 +32,8 @@ namespace Project.Entities
                 }
             }
             ChangeType.ChangeColumnDataType(dt, "Population (2020)", typeof(int));
-            return dt;
+            dt.Columns["Population (2020)"].SetOrdinal(1);
+            return dt; 
         }
     }
 }

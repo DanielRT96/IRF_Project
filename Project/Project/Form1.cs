@@ -15,20 +15,16 @@ namespace Project
     public partial class Form1 : Form
     {
         DataTable csv = GetCsvData.ConvertCSVtoDataTable("population_by_country_2020.csv");
-        List<HighestPopulation> MostPopulatedCountries = new List<HighestPopulation>();
+
         public Form1()
         {
             InitializeComponent();
             LoadData();
-
-
         }
 
         private void LoadData()
         {
             dataGridView1.DataSource = csv;
-            dataGridView1.Columns[("Population (2020)")].DisplayIndex = 1;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,19 +34,15 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e) // WIP
         {
-            MostPopulatedCountries.Clear();
+            DataTable highestPopluation = csv.Copy();
+            HighestPopulation.GetTopFive(highestPopluation, 2, 5);
 
-            MostPopulatedCountries.Add(new HighestPopulation() { Country = "China", Population = 100 });
-            MostPopulatedCountries.Add(new HighestPopulation() { Country = "Hungary", Population = 10 });
-            MostPopulatedCountries.Add(new HighestPopulation() { Country = "Germany", Population = 100 });
-
-            dataGridView1.DataSource = MostPopulatedCountries;
-
-            chart1.DataSource = MostPopulatedCountries;
+            dataGridView1.DataSource = highestPopluation;
+            chart1.DataSource = highestPopluation;
 
             var series = chart1.Series[0];
-            series.XValueMember = "Country";
-            series.YValueMembers = "Population";
+            series.XValueMember = "Country (or dependency)";
+            series.YValueMembers = "Population (2020)";
             series.BorderWidth = 2;
 
             var legend = chart1.Legends[0];
@@ -79,17 +71,15 @@ namespace Project
 
                     dataGridView1.DataSource = selectedCountry;
                 }
-
                 textBox1.Text = "";
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             // ...
         }
+
 
     }
 }
