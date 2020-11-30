@@ -15,11 +15,13 @@ namespace Project
     public partial class Form1 : Form
     {
         DataTable csv = GetCsvData.ConvertCSVtoDataTable("population_by_country_2020.csv");
+        Quiz quiz;
 
         public Form1()
         {
             InitializeComponent();
             LoadData();
+            this.quiz = new Quiz(csv);
         }
 
         private void LoadData()
