@@ -12,14 +12,13 @@ namespace Project.Entities
         public static void GetTopFive(DataTable dt, int numberOfColumn, int numberOfRows)
         {
             dt.DefaultView.Sort = "Population (2020) desc";
-            int totalColumnsToReserve = numberOfColumn;
-            for (int i = dt.Columns.Count - 1; i >= totalColumnsToReserve; i--)
+
+            for (int i = dt.Columns.Count - 1; i >= numberOfColumn; i--)
             {
                 dt.Columns.RemoveAt(i);
             }
 
-            int totalRowsToReserve = numberOfRows;
-            for (int i = dt.Rows.Count - 1; i >= totalRowsToReserve; i--)
+            for (int i = dt.Rows.Count - 1; i >= numberOfRows; i--)
             {
                 dt.Rows.RemoveAt(i);
             }

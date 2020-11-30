@@ -8,5 +8,6 @@ namespace Project.Entities
 {
     public class Quiz
     {
+
     }
 }
