@@ -84,8 +84,9 @@ namespace Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-            changePanel(panel3);
-            // ...
+            var newPanel = quiz.generateQuestion();
+            this.Controls.Add(newPanel);
+            changePanel(newPanel);
         }
 
         private void changePanel(Panel chosenPanel)
