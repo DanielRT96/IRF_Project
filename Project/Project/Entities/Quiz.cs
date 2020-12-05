@@ -29,12 +29,12 @@ namespace Project.Entities
 
             var questionLabel = new Label
             {
-                Location = new Point(250, 100),
+                Location = new Point(150, 100),
                 Name = "label2",
-                Size = new Size(400, 20),
+                Size = new Size(600, 80),
                 Text = questionText + country + "?",
-                Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(238))),
-            };
+                Font = new Font("Verdana", 20F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)))
+        };
 
             panel.Controls.Add(questionLabel);
 
@@ -46,9 +46,10 @@ namespace Project.Entities
             {
                 var answerButton = new Button
                 {
-                    Location = new Point(250 + 100 * i, 200),
+                    Location = new Point(150 + 200 * i, 200),
                     Name = "button" + (4 + i),
-                    Size = new Size(75, 23),
+                    Size = new Size(100, 30),
+                    Font = new Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238))),
                     Text = correnctAnswerIndex == i ? answer.ToString() : Convert.ToString(randomGen.Next(Convert.ToInt32(answer * 0.8), Convert.ToInt32(answer * 1.2))),
                 };
                 answerButton.Click += new EventHandler(CheckCorrectAnswer);
