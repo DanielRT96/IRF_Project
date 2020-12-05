@@ -16,6 +16,7 @@ namespace Project
     {
         DataTable csv = GetCsvData.ConvertCSVtoDataTable("population_by_country_2020.csv");
         Quiz quiz;
+        int getTopPop;
 
         public Form1()
         {
@@ -38,10 +39,11 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e)
         {
+            getTopPop = (int)numericUpDown1.Value;
             changePanel(panel1);
 
             DataTable highestPopluation = csv.Copy();
-            HighestPopulation.GetTopFive(highestPopluation, 2, 5);
+            HighestPopulation.GetTopFive(highestPopluation, 2, getTopPop);
 
             dataGridView1.DataSource = highestPopluation;
             chart1.DataSource = highestPopluation;
