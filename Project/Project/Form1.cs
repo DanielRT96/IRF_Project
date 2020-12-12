@@ -43,7 +43,7 @@ namespace Project
             changePanel(panel1);
 
             DataTable highestPopluation = csv.Copy();
-            HighestPopulation.GetTopFive(highestPopluation, 2, getTopPop);
+            HighestPopulation.GetTopPopulation(highestPopluation, 2, getTopPop);
 
             dataGridView1.DataSource = highestPopluation;
             chart1.DataSource = highestPopluation;

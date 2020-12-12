@@ -9,7 +9,7 @@ namespace Project.Entities
 {
     public class HighestPopulation
     {
-        public static void GetTopFive(DataTable dt, int numberOfColumn, int numberOfRows)
+        public static void GetTopPopulation(DataTable dt, int numberOfColumn, int numberOfRows)
         {
             dt.DefaultView.Sort = "Population (2020) desc";
 
