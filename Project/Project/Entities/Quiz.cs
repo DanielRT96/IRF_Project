@@ -25,7 +25,7 @@ namespace Project.Entities
             var questionText = "What is the population of ";
 
             var selectedRow = randomGen.Next(0, this.dataTable.Rows.Count - 1);
-            var country = (string)this.dataTable.Rows[selectedRow]["Country (or dependency)"];
+            var country = (string)dataTable.Rows[selectedRow]["Country (or dependency)"];
 
             var questionLabel = new Label
             {
@@ -33,14 +33,13 @@ namespace Project.Entities
                 Name = "label2",
                 Size = new Size(600, 80),
                 Text = questionText + country + "?",
-                Font = new Font("Verdana", 20F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)))
+                Font = new Font("Verdana", 20F, FontStyle.Regular, GraphicsUnit.Point, 238)
         };
 
             panel.Controls.Add(questionLabel);
 
-            var answer = (int)this.dataTable.Rows[selectedRow]["Population (2020)"];
+            var answer = (int)dataTable.Rows[selectedRow]["Population (2020)"];
             var correnctAnswerIndex = randomGen.Next(0, 3);
-            Console.WriteLine(correnctAnswerIndex);
 
             for (int i = 0; i < 3; i++)
             {
@@ -49,7 +48,7 @@ namespace Project.Entities
                     Location = new Point(150 + 200 * i, 200),
                     Name = "button" + (4 + i),
                     Size = new Size(100, 30),
-                    Font = new Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238))),
+                    Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 238),
                     Text = correnctAnswerIndex == i ? answer.ToString() : Convert.ToString(randomGen.Next(Convert.ToInt32(answer * 0.8), Convert.ToInt32(answer * 1.2))),
                 };
                 answerButton.Click += new EventHandler(CheckCorrectAnswer);
